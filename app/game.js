@@ -27,7 +27,11 @@ class Game {
       console.log("Draw");
 
     } else {
-      this.ia.notificar(players.vermelho);
+      if (this.estadoAtual.turno === players.azul) {
+        return this.ia.notificar(players.azul);
+      }
+
+      return this.ia.notificar(players.vermelho);
     }
   }
 }

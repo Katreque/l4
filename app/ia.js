@@ -1,6 +1,7 @@
 class Ia {
-  constructor(dificuldade) {
-    this.nivelDificuldade = dificuldade;
+  constructor(dificuldadeAzul, dificuldadeVermelho) {
+    this.nivelDificuldadeAzul = dificuldadeAzul;
+    this.nivelDificuldadeVermelho = dificuldadeVermelho;
     this.game = {};
   }
 
