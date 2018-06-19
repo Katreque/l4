@@ -1,7 +1,6 @@
 class Ia {
-  constructor(dificuldadeAzul, dificuldadeVermelho) {
-    this.nivelDificuldadeAzul = dificuldadeAzul;
-    this.nivelDificuldadeVermelho = dificuldadeVermelho;
+  constructor(dificuldade) {
+    this.nivelDificuldade = dificuldade;
     this.game = {};
   }
 
@@ -55,7 +54,7 @@ class Ia {
 
   jogadaExpert(turno) {
     let disponivel = this.game.estadoAtual.posicoesVazias();
-
+    debugger
     let acoesDisponiveis = disponivel.map(function (posicao) {
       let acao = new JogadaIa(posicao);
       let proximo = acao.aplicar(this.game.estadoAtual);
@@ -104,6 +103,7 @@ class JogadaIa {
     }
 
     proximo.proximoTurno();
+    debugger
     return proximo;
   }
 }

@@ -1,14 +1,14 @@
 var resultados = {
-  inicio: '-1',
-  rodando: '1',
-  empate: '2',
-  vitoria: '3'
+  inicio: 'inicio',
+  rodando: 'rodando',
+  empate: 'empate',
+  vitoria: 'vitoria'
 }
 
 var players = {
-  azul: 'a',
-  vermelho: 'v',
-  vazio: 'e'
+  azul: 'azul',
+  vermelho: 'vermelho',
+  vazio: 'vazio'
 }
 
 var dificuldades = {

@@ -13,12 +13,6 @@ class Estado {
     }
   }
 
-  inicializaBoard() {
-    for (let i = 0; i < 12; i++) {
-      this.board.push(players.vazio);
-    }
-  }
-
   proximoTurno() {
     this.turno = (this.turno === players.azul)? players.vermelho:players.azul;
   }

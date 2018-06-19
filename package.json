@@ -4,6 +4,7 @@
   "description": "",
   "main": "consts.js",
   "scripts": {
+    "start": "aliv",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Katreque",

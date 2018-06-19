@@ -1,21 +1,29 @@
 class Game {
-  constructor(Ia) {
-    this.ia = Ia;
+  constructor(iaAzul, iaVermelho) {
+    this.iaAzul = iaAzul;
+    this.iaVermelho = iaVermelho;
     this.estadoAtual = new Estado();
-    this.estadoAtual.inicializaBoard();
     this.estadoAtual.turno = players.azul;
     this.status = resultados.inicio;
   }
 
   iniciar() {
+    this.inicializaBoard(this.estadoAtual.board);
     if (this.status === resultados.inicio) {
       this.proximoEstado(this.estadoAtual);
-      this.status =  resultados.rodando;
+      this.status = resultados.rodando;
+    }
+  }
+
+  inicializaBoard(board) {
+    for (let i = 0; i < 12; i++) {
+      board[i] = (players.vazio);
     }
   }
 
   proximoEstado(estado) {
     this.estadoAtual = estado;
+    debugger
     if (this.estadoAtual.fimDeJogo()) {
       this.status = resultados.vitoria;
 
@@ -28,10 +36,9 @@ class Game {
 
     } else {
       if (this.estadoAtual.turno === players.azul) {
-        return this.ia.notificar(players.azul);
+        return this.iaAzul.notificar(players.azul);
       }
-
-      return this.ia.notificar(players.vermelho);
+      return this.iaVermelho.notificar(players.vermelho);
     }
   }
 }
