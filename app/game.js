@@ -1,3 +1,5 @@
+var gameSendoJogado = {};
+
 class Game {
   constructor(iaAzul, iaVermelho) {
     this.iaAzul = iaAzul;
@@ -18,27 +20,42 @@ class Game {
   inicializaBoard(board) {
     for (let i = 0; i < 12; i++) {
       board[i] = (players.vazio);
+      $('#' + i).removeClass('red');
+      $('#' + i).removeClass('blue');
     }
   }
 
   proximoEstado(estado) {
     this.estadoAtual = estado;
-    debugger
+    this.atualizaGrafico(estado);
+
     if (this.estadoAtual.fimDeJogo()) {
       this.status = resultados.vitoria;
 
       if (this.estadoAtual.resultado === players.azul) {
-        console.log("Blue");
+        return console.log("Blue");
       } else if (this.estadoAtual.resultado === players.vermelho) {
-        console.log("Red");
+        return console.log("Red");
       }
-      console.log("Draw");
+      return console.log("Draw");
 
     } else {
-      if (this.estadoAtual.turno === players.azul) {
-        return this.iaAzul.notificar(players.azul);
+      setTimeout(() => {
+        if (this.estadoAtual.turno === players.azul) {
+          return this.iaAzul.notificar(players.azul);
+        }
+        return this.iaVermelho.notificar(players.vermelho);        
+      }, 1000);
+    }
+  }
+
+  atualizaGrafico(estado) {
+    for (let i = 0; i < 12; i++) {
+      if (estado.board[i] === players.azul) {
+        $('#' + i).addClass("blue");
+      } else if (estado.board[i] === players.vermelho) {
+        $('#' + i).addClass("red");
       }
-      return this.iaVermelho.notificar(players.vermelho);
     }
   }
 }
@@ -46,10 +63,10 @@ class Game {
 var score = function(estado) {
   if (estado.resultado !== resultados.rodando) {
     if (estado.resultado === players.azul) {
-      return 10 - estado.jogadasIA;
+      return 10 - estado.jogadasVermelho;
 
     } else if (estado.resultado === players.vermelho) {
-      return -10 + estado.jogadasIA;
+      return -10 + estado.jogadasAzul;
 
     } else {
       return 0;

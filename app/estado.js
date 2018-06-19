@@ -2,11 +2,21 @@ class Estado {
   constructor(estadoAnterior) {
     this.board = [];
     this.turno = "";
-    this.jogadasIA = 0;
+    this.jogadasAzul = 0;
+    this.jogadasVermelho = 0;
     this.resultado = resultados.rodando;
 
     if (!!estadoAnterior) {
-      this.board = estadoAnterior.board;
+      let len = estadoAnterior.board.length;
+
+      this.board = new Array(len);
+      for (let i = 0; i < 12; i++) {
+        if (!estadoAnterior.board[i]) {
+          this.board[i] = players.vazio;
+        } else {
+          this.board[i] = estadoAnterior.board[i];
+        }
+      }
       this.turno = estadoAnterior.turno;
       this.jogadasIA = estadoAnterior.jogadasIA;
       this.resultado = estadoAnterior.resultado;

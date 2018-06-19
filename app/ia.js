@@ -1,7 +1,6 @@
 class Ia {
   constructor(dificuldade) {
     this.nivelDificuldade = dificuldade;
-    this.game = {};
   }
 
   resultadoMiniMax(estado) {
@@ -12,21 +11,21 @@ class Ia {
     let resultadoEstado;
 
     if (estado.turno === players.azul) {
-      resultadoEstado = -100000;
+      resultadoEstado = -1000;
     } else {
-      resultadoEstado = 100000;
+      resultadoEstado = 1000;
     }
 
     let posicoesDisponiveis = estado.posicoesVazias();
 
-    let proximosEstadosDisponiveis = posicoesDisponiveis.map(function (posicao) {
+    let proximosEstadosDisponiveis = posicoesDisponiveis.map((posicao) => {
       let acao = new JogadaIa(posicao);
       let proximoEstado = acao.aplicar(estado);
 
       return proximoEstado;
     })
 
-    proximosEstadosDisponiveis.forEach(function (proximoEstado) {
+    proximosEstadosDisponiveis.forEach((proximoEstado) => {
       var proximoResultado = this.resultadoMiniMax(proximoEstado);
 
       if (estado.turno === players.azul) {
@@ -38,30 +37,29 @@ class Ia {
           resultadoEstado = proximoResultado;
         }
       }
-    }.bind(this))
+    })
 
     return resultadoEstado;
   }
 
   jogadaRandom(turno) {
-    let disponivel = this.game.estadoAtual.posicoesVazias();
+    let disponivel = gameSendoJogado.estadoAtual.posicoesVazias();
     let escolhaAleatoria = disponivel[Math.floor(Math.random() * disponivel.length)];
     let acao = new JogadaIa(escolhaAleatoria);
-    let proximo = acao.aplicar(this.game.estadoAtual);
+    let proximo = acao.aplicar(gameSendoJogado.estadoAtual);
 
-    this.game.proximoEstado(proximo);
+    gameSendoJogado.proximoEstado(proximo);
   }
 
   jogadaExpert(turno) {
-    let disponivel = this.game.estadoAtual.posicoesVazias();
-    debugger
-    let acoesDisponiveis = disponivel.map(function (posicao) {
+    let disponivel = gameSendoJogado.estadoAtual.posicoesVazias();
+    let acoesDisponiveis = disponivel.map((posicao) => {
       let acao = new JogadaIa(posicao);
-      let proximo = acao.aplicar(this.game.estadoAtual);
+      let proximo = acao.aplicar(gameSendoJogado.estadoAtual);
       acao.valorMiniMax = this.resultadoMiniMax(proximo);
 
       return acao;
-    }.bind(this))
+    })
 
     if (turno === players.azul) {
       acoesDisponiveis.sort(sortAcoesDecrescente)
@@ -70,13 +68,13 @@ class Ia {
     }
 
     let acaoEscolhida = acoesDisponiveis[0];
-    let proximo = acaoEscolhida.aplicar(this.game.estadoAtual);
+    let proximo = acaoEscolhida.aplicar(gameSendoJogado.estadoAtual);
 
-    this.game.proximoEstado(proximo);
+    gameSendoJogado.proximoEstado(proximo);
   }
 
   joga(game) {
-    this.game = game;
+    gameSendoJogado = game;
   }
 
   notificar(turno) {
@@ -99,11 +97,14 @@ class JogadaIa {
     proximo.board[this.posicaoAcao] = estado.turno;
 
     if (estado.turno === players.azul) {
-      proximo.jogadasIA++;
+      proximo.jogadasAzul++;
+    }
+
+    if (estado.turno === players.vermelho) {
+      proximo.jogadasVermelho++;
     }
 
     proximo.proximoTurno();
-    debugger
     return proximo;
   }
 }

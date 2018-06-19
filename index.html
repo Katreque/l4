@@ -3,11 +3,40 @@
   <head>
     <base href="/" />
     <title>POGGERS</title>
+    <link rel="stylesheet" href="app/style.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   </head>
   <body>
     <div>
       <button id="botao" class="btn btn-secondary">!</button>
+      <div>
+        <table>
+          <tr>
+            <th>-</th>
+            <th>-</th>
+            <th>-</th>
+            <th>-</th>
+          </tr>
+          <tr>
+            <td id="0">0</td>
+            <td id="1">0</td>
+            <td id="2">0</td>
+            <td id="3">0</td>
+          </tr>
+          <tr>
+            <td id="4">0</td>
+            <td id="5">0</td>
+            <td id="6">0</td>
+            <td id="7">0</td>
+          </tr>
+          <tr>
+            <td id="8">0</td>
+            <td id="9">0</td>
+            <td id="10">0</td>
+            <td id="11">0</td>
+          </tr>
+        </table>
+      </div>
     </div>
     <script src="./app/consts.js"></script>
     <script src="./app/estado.js"></script>
@@ -19,7 +48,7 @@
     <script>
     $('#botao').click(function() {
       var azul = new Ia('ex');
-      var vermelho = new Ia('r');
+      var vermelho = new Ia('ex');
       var duelo = new Game(azul, vermelho);
 
       azul.joga(duelo);
