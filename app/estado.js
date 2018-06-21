@@ -18,7 +18,8 @@ class Estado {
         }
       }
       this.turno = estadoAnterior.turno;
-      this.jogadasIA = estadoAnterior.jogadasIA;
+      this.jogadasAzul = estadoAnterior.jogadasAzul;
+      this.jogadasVermelho = estadoAnterior.jogadasVermelho;
       this.resultado = estadoAnterior.resultado;
     }
   }
@@ -40,12 +41,6 @@ class Estado {
   }
 
   fimDeJogo() {
-    //Empate
-    if (!this.posicoesVazias().length) {
-      this.resultado = resultados.empate;
-      return true;
-    }
-
     //Vertical
     for (let i = 0; i < 4; i++) {
       if (this.board[i] !== players.vazio && ((this.board[i] === this.board[4+i]) && (this.board[4+i] === this.board[8+i]))) {
@@ -55,13 +50,13 @@ class Estado {
     }
 
     //Horizontal
-    for (let i = 0; i < 3; i+=4) {
-      if (this.board[i] !== players.vazio && ((this.board[i] === this.board[1+i]) && (this.board[1+i] && this.board[2+i]))) {
+    for (let i = 0; i < 12; i+=4) {
+      if (this.board[i] !== players.vazio && ((this.board[i] === this.board[1+i]) && (this.board[1+i] === this.board[2+i]))) {
         this.resultado = this.board[i];
         return true;
       }
 
-      if (this.board[1+i] !== players.vazio && ((this.board[1+i] === this.board[2+i]) && (this.board[2+i] && this.board[3+i]))) {
+      if (this.board[1+i] !== players.vazio && ((this.board[1+i] === this.board[2+i]) && (this.board[2+i] === this.board[3+i]))) {
         this.resultado = this.board[1+i];
         return true;
       }
@@ -78,6 +73,12 @@ class Estado {
         this.resultado = this.board[2+i];
         return true;
       }
+    }
+
+    //Empate
+    if (!this.posicoesVazias().length) {
+      this.resultado = resultados.empate;
+      return true;
     }
 
     return false;
