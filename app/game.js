@@ -44,19 +44,43 @@ class Game {
         if (this.estadoAtual.turno === players.azul) {
           return this.iaAzul.notificar(players.azul);
         }
-        return this.iaVermelho.notificar(players.vermelho);        
+        return this.iaVermelho.notificar(players.vermelho);
       }, 1000);
     }
   }
 
-  atualizaGrafico(estado) {
-    for (let i = 0; i < 12; i++) {
-      if (estado.board[i] === players.azul) {
-        $('#' + i).addClass("blue");
-      } else if (estado.board[i] === players.vermelho) {
-        $('#' + i).addClass("red");
+  aplicarGravidade(estado) {
+    return new Promise((resolve, reject) => {
+      for (let i = 0; i < 4; i++) {
+        if(estado.board[i+4] === players.vazio) {
+          if (estado.board[i] !== players.vazio) {
+            estado.board[i+4] = estado.board[i];
+            estado.board[i] = players.vazio;
+          }
+        }
+
+        if (estado.board[i+8] === players.vazio) {
+          if (estado.board[i+4] !== players.vazio) {
+            estado.board[i+8] = estado.board[i+4];
+            estado.board[i+4] = players.vazio;
+          }
+        }
       }
-    }
+      resolve();
+    })
+  }
+
+  atualizaGrafico(estado) {
+    this.aplicarGravidade(estado)
+      .then(() => {
+        for (let i = 0; i < 12; i++) {
+          if (estado.board[i] === players.azul) {
+            $('#' + i).addClass("blue");
+          } else if (estado.board[i] === players.vermelho) {
+            $('#' + i).addClass("red");
+          }
+        }
+      })
   }
 }
 
