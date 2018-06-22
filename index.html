@@ -7,48 +7,55 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   </head>
   <body>
-    <div>
-      <div class="container col-md-12">
-        <div class="col-md-1">
-          <label>a</label>
-          <select id="select-azul" class="form-control">
-            <option value="r">R</option>
-            <option value="ex">Kat</option>
-          </select>
-          <label>v</label>
-          <select id="select-vermelho" class="form-control">
-            <option value="r">R</option>
-            <option value="ex">Kat</option>
-          </select>
-          <button id="botao" class="btn btn-secondary">!</button>
-          <div>
-            <table>
-              <tr>
-                <th>-</th>
-                <th>-</th>
-                <th>-</th>
-                <th>-</th>
-              </tr>
-              <tr>
-                <td id="0">0</td>
-                <td id="1">0</td>
-                <td id="2">0</td>
-                <td id="3">0</td>
-              </tr>
-              <tr>
-                <td id="4">0</td>
-                <td id="5">0</td>
-                <td id="6">0</td>
-                <td id="7">0</td>
-              </tr>
-              <tr>
-                <td id="8">0</td>
-                <td id="9">0</td>
-                <td id="10">0</td>
-                <td id="11">0</td>
-              </tr>
-            </table>
-          </div>
+    <div class="d-flex">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <label>Azul</label>
+        <select id="select-azul" class="form-control">
+          <option value="r">Random</option>
+          <option value="ex">Katreque</option>
+        </select>
+        <label>Vermelho</label>
+        <select id="select-vermelho" class="form-control">
+          <option value="r">Random</option>
+          <option value="ex">Katreque</option>
+        </select>
+        <div style="padding-top: 10px; padding-bottom: 10px">
+          <button id="botao" class="btn btn-primary btn-block btn-secondary">Jogar</button>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+      <div class="d-flex justify-content-center">
+        <table height="500am" width="500am" border="1am">
+          <tr>
+            <td id="0"></td>
+            <td id="1"></td>
+            <td id="2"></td>
+            <td id="3"></td>
+          </tr>
+          <tr>
+            <td id="4"></td>
+            <td id="5"></td>
+            <td id="6"></td>
+            <td id="7"></td>
+          </tr>
+          <tr>
+            <td id="8"></td>
+            <td id="9"></td>
+            <td id="10"></td>
+            <td id="11"></td>
+          </tr>
+        </table>
+        <div id="azulwins" class="nao-mostrar">
+          <p>Azul Venceu!</p>
+        </div>
+        <div id="vermelhowins" class="nao-mostrar">
+          <p>Vermelho Venceu!</p>
+        </div>
+        <div id="empatewins" class="nao-mostrar">
+          <p>Empate!</p>
         </div>
       </div>
     </div>

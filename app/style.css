@@ -5,3 +5,11 @@
 .blue {
   background-color:#0d57c7
 }
+
+.nao-mostrar {
+  display: none;
+}
+
+.mostrar {
+  display: inline;
+}

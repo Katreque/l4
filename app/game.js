@@ -11,6 +11,12 @@ class Game {
 
   iniciar() {
     this.inicializaBoard(this.estadoAtual.board);
+    $("#azulwins").addClass("nao-mostrar");
+    $("#vermelhowins").addClass("nao-mostrar");
+    $("#empatewins").addClass("nao-mostrar");
+    $("#azulwins").removeClass("mostrar");
+    $("#vermelhowins").removeClass("mostrar");
+    $("#empatewins").removeClass("mostrar");
     if (this.status === resultados.inicio) {
       this.proximoEstado(this.estadoAtual);
       this.status = resultados.rodando;
@@ -33,11 +39,15 @@ class Game {
       this.status = resultados.vitoria;
 
       if (this.estadoAtual.resultado === players.azul) {
-        return console.log("Blue");
+        $("#azulwins").removeClass("nao-mostrar");
+        return $("#azulwins").addClass("mostrar");
       } else if (this.estadoAtual.resultado === players.vermelho) {
-        return console.log("Red");
+        $("#vermelhowins").removeClass("nao-mostrar");
+        return $("#vermelhowins").addClass("mostrar");
       }
-      return console.log("Draw");
+
+      $("#empatewins").removeClass("nao-mostrar");
+      $("#empatewins").addClass("mostrar");
 
     } else {
       setTimeout(() => {
@@ -45,7 +55,7 @@ class Game {
           return this.iaAzul.notificar(players.azul);
         }
         return this.iaVermelho.notificar(players.vermelho);
-      }, 1000);
+      }, 5000);
     }
   }
 
