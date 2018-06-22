@@ -9,7 +9,7 @@
   <body>
     <div>
       <div class="container col-md-12">
-        <div class="col-md-1">
+        <!--<div class="col-md-1">
           <label>a</label>
           <select id="select-azul" class="form-control">
             <option value="r">R</option>
@@ -19,7 +19,7 @@
           <select id="select-vermelho" class="form-control">
             <option value="r">R</option>
             <option value="ex">Kat</option>
-          </select>
+          </select>-->
           <button id="botao" class="btn btn-secondary">!</button>
           <div>
             <table>
@@ -61,8 +61,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <script>
     $('#botao').click(function() {
-      var azul = new Ia($('#select-azul').val());
-      var vermelho = new Ia($('#select-vermelho').val());
+      //var azul = new Ia($('#select-azul').val());
+      //var vermelho = new Ia($('#select-vermelho').val());
+      var azul = new Ia('ex');
+      var vermelho = new Ia('r');
       var duelo = new Game(azul, vermelho);
 
       azul.joga(duelo);

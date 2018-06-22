@@ -45,33 +45,12 @@ class Game {
           return this.iaAzul.notificar(players.azul);
         }
         return this.iaVermelho.notificar(players.vermelho);
-      }, 1000);
+      }, 1500);
     }
   }
 
-  aplicarGravidade(estado) {
-    return new Promise((resolve, reject) => {
-      for (let i = 0; i < 4; i++) {
-        if(estado.board[i+4] === players.vazio) {
-          if (estado.board[i] !== players.vazio) {
-            estado.board[i+4] = estado.board[i];
-            estado.board[i] = players.vazio;
-          }
-        }
-
-        if (estado.board[i+8] === players.vazio) {
-          if (estado.board[i+4] !== players.vazio) {
-            estado.board[i+8] = estado.board[i+4];
-            estado.board[i+4] = players.vazio;
-          }
-        }
-      }
-      resolve();
-    })
-  }
-
   atualizaGrafico(estado) {
-    this.aplicarGravidade(estado)
+    aplicarGravidade(estado.board)
       .then(() => {
         for (let i = 0; i < 12; i++) {
           if (estado.board[i] === players.azul) {
@@ -84,16 +63,23 @@ class Game {
   }
 }
 
-var score = function(estado) {
-  if (estado.resultado !== resultados.rodando) {
-    if (estado.resultado === players.azul) {
-      return 10 - estado.jogadasVermelho;
+var aplicarGravidade = function (board) {
+    return new Promise((resolve, reject) => {
+      for (let i = 0; i < 4; i++) {
+        if(board[i+4] === players.vazio) {
+          if (board[i] !== players.vazio) {
+            board[i+4] = board[i];
+            board[i] = players.vazio;
+          }
+        }
 
-    } else if (estado.resultado === players.vermelho) {
-      return -10 + estado.jogadasAzul;
-
-    } else {
-      return 0;
-    }
+        if (board[i+8] === players.vazio) {
+          if (board[i+4] !== players.vazio) {
+            board[i+8] = board[i+4];
+            board[i+4] = players.vazio;
+          }
+        }
+      }
+      resolve();
+    })
   }
-}

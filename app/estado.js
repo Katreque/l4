@@ -29,15 +29,25 @@ class Estado {
   }
 
   posicoesVazias() {
-    let posicoes = []
+    return aplicarGravidade(this.board)
+      .then(() => {
+        let posicoes = [];
 
-    for (let i = 0; i < 12; i++) {
-      if (this.board[i] === players.vazio) {
-        posicoes.push(i);
-      }
-    }
+        for (let i = 0; i < 4; i++) {
+          if (this.board[i+8] === players.vazio) {
+            posicoes.push(i+8);
+            continue;
+          } else if (this.board[i+4] === players.vazio) {
+            posicoes.push(i+4);
+            continue;
+          } else if (this.board[i] === players.vazio) {
+            posicoes.push(i);
+            continue;
+          }
+        }
 
-    return posicoes;
+        return posicoes;
+      })
   }
 
   fimDeJogo() {
@@ -76,11 +86,14 @@ class Estado {
     }
 
     //Empate
-    if (!this.posicoesVazias().length) {
-      this.resultado = resultados.empate;
-      return true;
-    }
-
+    this.posicoesVazias()
+      .then((retorno) => {
+        if (!retorno.length) {
+          this.resultado = resultados.empate;
+          return true;
+        }
+      });
+      
     return false;
   }
 }
